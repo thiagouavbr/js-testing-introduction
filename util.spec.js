@@ -37,9 +37,12 @@ test('should open google', async () => {
   const page = await browser.newPage();
   await page.goto('http://www.google.com');
   await page.click('input[name="q"]');
-  await page.type('input[name="q"]', 'test', {
+  await page.type('input[name="q"]', 'Caico', {
     delay: 100
   });
+  await page.click('input[name="btnK"]');
+  expect(
+    await page.title()).toBe('Caico - Pesquisa Google');
   await browser.close();
 });
 
