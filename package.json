@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack app.js --mode development --watch",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "js",
