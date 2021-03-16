@@ -1,7 +1,5 @@
 const puppeteer = require('puppeteer');
-const {
-  generateText
-} = require('./util');
+const { generateText } = require('./util');
 
 //The visual test use to take long, so have to change the timeout of jest
 jest.setTimeout(30000);
@@ -34,15 +32,14 @@ test('should open google', async () => {
     slowMo: 80,
     args: ['--window-size=1920,1080'],
   });
-  const page = await browser.newPage();
+  const [page] = await browser.pages();
   await page.goto('http://www.google.com');
   await page.click('input[name="q"]');
   await page.type('input[name="q"]', 'Caico', {
-    delay: 100
+    delay: 100,
   });
   await page.click('input[name="btnK"]');
-  expect(
-    await page.title()).toBe('Caico - Pesquisa Google');
+  expect(await page.title()).toBe('Caico - Pesquisa Google');
   await browser.close();
 });
 
@@ -54,19 +51,19 @@ test('should make an youtube search and print the page', async () => {
     slowMo: 20,
     args: ['--window-size=1920,1080'],
   });
-  const page = await browser.newPage();
+  const [page] = await browser.pages();
   await page.goto('https://youtube.com');
   await page.type('#search', 'Fleetwood Mac Dreams');
   await page.click('button#search-icon-legacy');
   await page.waitForSelector('ytd-thumbnail.ytd-video-renderer');
   await page.screenshot({
-    path: 'youtube_fm_dreams_list.png'
+    path: 'youtube_fm_dreams_list.png',
   });
   const videos = await page.$$('ytd-thumbnail.ytd-video-renderer');
   await videos[2].click();
   await page.waitForSelector('.html5-video-container');
   await page.screenshot({
-    path: screenshot
+    path: screenshot,
   });
   await browser.close();
   console.log('See screenshot: ' + screenshot);
