@@ -8,7 +8,7 @@ To run these tests, simply run:
 
 And you can watch the tests too:
 
-`npm run test-watch`
+`npm run test:watch`
 
 The following tests are executed on this packet:
 
